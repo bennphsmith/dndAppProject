@@ -2,7 +2,7 @@
 '''
 ##############
 DnD App File
-Author - Benjamin Smith
+Author: Benjamin Smith
 Last Edited: 01/04/2020
 App Description:
 1. Pull object data from: http://www.dnd5eapi.co/ and present it
