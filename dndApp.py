@@ -16,23 +16,24 @@ App Description:
 # Flask for web server connectivity
 # forms to use forms created in other directory file
 from flask import Flask, render_template
+from forms import RegistrationForm, LoginForm
 # from forms import RegistrationForm, LoginForm
 
 # Initialise app
 app = Flask(__name__)
-# app.config['SECRET_KEY'] = '756ba24325dfc559acf36854910afc59' # Secret Key for security purposes
+app.config['SECRET_KEY'] = '756ba24325dfc559acf36854910afc59' # Secret Key for security purposes (CSRF, {{form.hidden_tag()}})
 
 # Route to app main/registration page
 @app.route('/', methods=['GET', 'POST'])
-@app.route('/register/')
+@app.route('/register/', methods=['GET', 'POST'])
 def Register():
-    # form = RegistrationForm()
-    return render_template('register_form.html')
+    regForm = RegistrationForm()
+    return render_template('register_form.html', form=regForm)
 
-@app.route('/login/')
+@app.route('/login/', methods=['GET', 'POST'])
 def Login():
-    # form = RegistrationForm()
-    return render_template('login_form.html')
+    logForm = LoginForm()
+    return render_template('login_form.html', form=logForm)
 
 #Enable script to be run from python
 if __name__ == "__main__":

@@ -2,38 +2,37 @@
 <!------ Orignal HTML for layout found on: https://bootsnipp.com/snippets/bxzmb ---------->
 <!------ Edited by Benjamin Smith - changes from original highlighted with comments ---------->
 <!------ Last edited: 09/04/2020 ---------->
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!DOCTYPE html>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" style="background-image: url('tavern_interior.jpg')">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<!DOCTYPE html> 
-<body>
+<body style="background-image:url(tavern_interior.jpg)"></body>
     <div id="login">
-        {% block title %}{% endblock title %} <!-- Input header to the page -->
+        {% block title %}{% endblock title %} <!-- Declare page title -->
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" action="" method="post">
-                            <!-- form.hidden_tag() - Hidden Tag added to prevent XSS attack -->
+                        <form id="login-form" class="form" action="" method="POST">
+                            {{form.hidden_tag()}} <!-- Hidden Tag added to prevent XSS attack -->
                             {% block form_title %}{% endblock form_title %} <!-- Input title to the form -->
                             {% block first_name %}{% endblock first_name %} <!-- Input first_name field to Register template -->
                             {% block last_name %}{% endblock last_name %} <!-- Input last_name field to Register template -->
                             <div class="form-group">
-                                <label for="email" class="text-info">Email:</label><br>
-                                <input type="text" name="email" id="email" class="form-control">
+                                {{form.email.label(class="form-control-label text-info")}}
+                                {{form.email(class="form-control text-info")}}
                             </div>
                             <div class="form-group">
-                                <label for="password" class="text-info">Password:</label><br>
-                                <input type="text" name="password" id="password" class="form-control">
+                                {{form.password.label(class="form-control-label text-info")}}
+                                {{form.password(class="form-control text-info")}}
                             </div>
                             {% block confirm_password %}{% endblock confirm_password %} <!-- Input confirm password field to Register template -->
                             <div class="form-group">
-                                <input type="submit" name="submit" class="btn btn-info btn-md" value="Submit">
+                                {{form.submit(class="btn text-info")}}
                             </div>
-                            {% block reglog_link %}{% endblock reglog_link %} <!-- Input relevant hyperlink to alternative form page -->
+                            % block reglog_link %}{% endblock reglog_link %} <!-- Input relevant hyperlink to alternative form page -->
                         </form>
                     </div>
                 </div>

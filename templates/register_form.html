@@ -11,20 +11,20 @@
 {% endblock form_title %}
 {% block first_name %} <!-- Create from-group for the User's name -->
     <div class="form-group">
-        <label for="first_name" class="text-info">First Name:</label><br>
-        <input type="text" name="first_name" id="first_name" class="form-control">
+        {{form.first_name.label(class="form-control-label text-info")}}
+        {{form.first_name(class="form-control text-info")}}
     </div>
 {% endblock first_name %}
 {% block last_name %} <!-- Create from-group for the User's name -->
     <div class="form-group">
-        <label for="last_name" class="text-info">Last Name:</label><br>
-        <input type="text" name="last_name" id="last_name" class="form-control">
+        {{form.last_name.label(class="form-control-label text-info")}}
+        {{form.last_name(class="form-control text-info")}}
     </div>
 {% endblock last_name %}
 {% block confirm_password %} <!-- Create from-group for confirm_password to check user has input correctly -->
     <div class="form-group">
-        <label for="password" class="text-info">Confirm Password:</label><br>
-        <input type="text" name="password" id="password" class="form-control">
+        {{form.confirm_password.label(class="form-control-label text-info")}}
+        {{form.confirm_password(class="form-control text-info")}}
     </div>
 {% endblock confirm_password %}
 {% block reglog_link %} <!-- Create from-group to hyperlink to the Login page with appropriate text-->
