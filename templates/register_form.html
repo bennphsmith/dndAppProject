@@ -1,0 +1,33 @@
+<!------ HTML register page for app.route('/register') ---------->
+<!------ Author: Benjamin Smith ---------->
+<!------ Last edited: 09/04/2020 ---------->
+
+{% extends "parent_form.html" %} <!-- Extend template from parent form -->
+{% block title %}
+    <h3 class="text-center text-white pt-5">Registration Form</h3>
+{% endblock title %}
+{% block form_title %}
+    <h3 class="text-center text-info">Greetings, Traveller!</h3>
+{% endblock form_title %}
+{% block first_name %} <!-- Create from-group for the User's name -->
+    <div class="form-group">
+        <label for="first_name" class="text-info">First Name:</label><br>
+        <input type="text" name="first_name" id="first_name" class="form-control">
+    </div>
+{% endblock first_name %}
+{% block last_name %} <!-- Create from-group for the User's name -->
+    <div class="form-group">
+        <label for="last_name" class="text-info">Last Name:</label><br>
+        <input type="text" name="last_name" id="last_name" class="form-control">
+    </div>
+{% endblock last_name %}
+{% block confirm_password %} <!-- Create from-group for confirm_password to check user has input correctly -->
+    <div class="form-group">
+        <label for="password" class="text-info">Confirm Password:</label><br>
+        <input type="text" name="password" id="password" class="form-control">
+    </div>
+{% endblock confirm_password %}
+{% block reglog_link %} <!-- Create from-group to hyperlink to the Login page with appropriate text-->
+    <div id="register-link" class="text-right">
+        <a href="#" class="text-info">Already a member? Login here!</a>
+{% endblock reglog_link %}

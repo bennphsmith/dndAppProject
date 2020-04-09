@@ -12,17 +12,27 @@ App Description:
 ###############
 '''
 
+# Import necessary modules
+# Flask for web server connectivity
+# forms to use forms created in other directory file
 from flask import Flask, render_template
+# from forms import RegistrationForm, LoginForm
 
+# Initialise app
 app = Flask(__name__)
+# app.config['SECRET_KEY'] = '756ba24325dfc559acf36854910afc59' # Secret Key for security purposes
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+# Route to app main/registration page
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/register/')
+def Register():
+    # form = RegistrationForm()
+    return render_template('register_form.html')
 
-@app.route('/about/', methods=['GET'])
-def about():
-    return render_template('original-true.html')
+@app.route('/login/')
+def Login():
+    # form = RegistrationForm()
+    return render_template('login_form.html')
 
 #Enable script to be run from python
 if __name__ == "__main__":
