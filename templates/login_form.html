@@ -4,12 +4,12 @@
 
 {% extends "parent_form.html" %} <!-- Extend template from parent form -->
 {% block title %}
-    <h3 class="text-center text-white pt-5">Login</h3>
+    <h3 class="text-center text-white pt-5">Login</h3> <!-- Declare title for page -->
 {% endblock title %}
 {% block form_title %}
-    <h3 class="text-center text-info">Back again so soon!</h3>
+    <h3 class="text-center text-info">Back again so soon!</h3> <!-- Write header for page -->
 {% endblock form_title %}
 {% block reglog_link %} <!-- Create from-group to hyperlink to the Registration page with appropriate text-->
     <div id="register-link" class="text-right">
-        <a href="#" class="text-info">Not a member? Register here!</a>
+        <a href="{{url_for('Register')}}" class="text-info">Not a member? Register here!</a>
 {% endblock reglog_link %}

@@ -21,6 +21,8 @@ Python - v: 3.6.9
 Flask - v: 1.1.1
 Cassandra - v:
 Bootstrap - v:
+pip3 install WTF-Flask (WTForms)
+pip3 install flask-cqlalchmey
 
 
 

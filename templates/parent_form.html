@@ -2,6 +2,8 @@
 <!------ Orignal HTML for layout found on: https://bootsnipp.com/snippets/bxzmb ---------->
 <!------ Edited by Benjamin Smith - changes from original highlighted with comments ---------->
 <!------ Last edited: 09/04/2020 ---------->
+
+
 <!DOCTYPE html>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" style="background-image: url('tavern_interior.jpg')">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -11,6 +13,15 @@
 <body style="background-image:url(tavern_interior.jpg)"></body>
     <div id="login">
         {% block title %}{% endblock title %} <!-- Declare page title -->
+        {% with messages = get_flashed_messages(with_categories=True) %} <!-- Check if any flask messages are available -->
+            {% if messages == True %}
+                {% for category, message in messages %} <!-- Loop through flask messages and display if available -->
+                    <div = class="alert alert-{{category}}">
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
@@ -21,18 +32,36 @@
                             {% block first_name %}{% endblock first_name %} <!-- Input first_name field to Register template -->
                             {% block last_name %}{% endblock last_name %} <!-- Input last_name field to Register template -->
                             <div class="form-group">
-                                {{form.email.label(class="form-control-label text-info")}}
-                                {{form.email(class="form-control text-info")}}
+                                {{form.email.label(class="form-control-label text-info")}} <!-- Call email from object form -->
+                                    {% if form.email.errors %} <!-- Check to see if input is valid -->
+                                        {{form.email(class="form-control text-info is-invalid")}}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.email.errors %} <!-- Loop through and print out errors -->
+                                                <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{form.email(class="form-control text-info")}}
+                                    {% endif %}
                             </div>
                             <div class="form-group">
-                                {{form.password.label(class="form-control-label text-info")}}
-                                {{form.password(class="form-control text-info")}}
+                                {{form.password.label(class="form-control-label text-info")}} <!-- Call password from form object -->
+                                    {% if form.password.errors %} <!-- Check to see if input is valid -->
+                                        {{form.password(class="form-control text-info is-invalid")}}
+                                        <div class="invalid-feedback">
+                                            {% for error in form.password.errors %} <!-- Loop through and print out errors -->
+                                                <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        {{form.password(class="form-control text-info")}}
+                                    {% endif %}
                             </div>
                             {% block confirm_password %}{% endblock confirm_password %} <!-- Input confirm password field to Register template -->
                             <div class="form-group">
-                                {{form.submit(class="btn text-info")}}
+                                {{form.submit(class="btn text-info")}} <!-- Call submit from form object -->
                             </div>
-                            % block reglog_link %}{% endblock reglog_link %} <!-- Input relevant hyperlink to alternative form page -->
+                            {% block reglog_link %}{% endblock reglog_link %} <!-- Input relevant hyperlink to alternative form page -->
                         </form>
                     </div>
                 </div>

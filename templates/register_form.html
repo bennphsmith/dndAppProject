@@ -11,23 +11,50 @@
 {% endblock form_title %}
 {% block first_name %} <!-- Create from-group for the User's name -->
     <div class="form-group">
-        {{form.first_name.label(class="form-control-label text-info")}}
-        {{form.first_name(class="form-control text-info")}}
+        {{form.first_name.label(class="form-control-label text-info")}} <!-- Call first_name from form object -->
+            {% if form.first_name.errors %} <!-- Check to see if input is valid -->
+                {{form.first_name(class="form-control text-info is-invalid")}}
+                    <div class="invalid-feedback">
+                        {% for error in form.first_name.errors %} <!-- Loop through and print out errors -->
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+            {% else %}
+                {{form.first_name(class="form-control text-info")}}
+            {% endif %}
     </div>
 {% endblock first_name %}
 {% block last_name %} <!-- Create from-group for the User's name -->
     <div class="form-group">
-        {{form.last_name.label(class="form-control-label text-info")}}
-        {{form.last_name(class="form-control text-info")}}
+        {{form.last_name.label(class="form-control-label text-info")}} <!-- Call last_name from form object -->
+            {% if form.last_name.errors %} <!-- Check to see if input is valid -->
+                {{form.last_name(class="form-control text-info is-invalid")}}
+                    <div class="invalid-feedback">
+                        {% for error in form.last_name.errors %} <!-- Loop through and print out errors -->
+                            <span>{{error}}</span>
+                        {% endfor %}
+                    </div>
+            {% else %}
+                {{form.last_name(class="form-control text-info")}}
+            {% endif %}
     </div>
 {% endblock last_name %}
 {% block confirm_password %} <!-- Create from-group for confirm_password to check user has input correctly -->
     <div class="form-group">
-        {{form.confirm_password.label(class="form-control-label text-info")}}
-        {{form.confirm_password(class="form-control text-info")}}
+        {{form.confirm_password.label(class="form-control-label text-info")}} <!-- Call confirm_password from form object -->
+            {% if form.confirm_password.errors %} <!-- Check to see if input is valid -->
+                {{form.confirm_password(class="form-control text-info is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in form.confirm_password.errors %} <!-- Loop through and print out errors -->
+                        <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{form.confirm_password(class="form-control text-info")}}
+            {% endif %}
     </div>
 {% endblock confirm_password %}
 {% block reglog_link %} <!-- Create from-group to hyperlink to the Login page with appropriate text-->
     <div id="register-link" class="text-right">
-        <a href="#" class="text-info">Already a member? Login here!</a>
+        <a href="{{url_for('Login')}}" class="text-info">Already a member? Login here!</a> 
 {% endblock reglog_link %}
