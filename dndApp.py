@@ -17,17 +17,26 @@ App Description:
 #forms to use forms.py in same directory
 from flask import Flask, render_template, flash, url_for, redirect
 from forms import RegistrationForm, LoginForm
-from flask.ext.cqlalchemy import CQLAlchemy
+from flask_cqlalchemy import CQLAlchemy
 
 #Initialise app
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '756ba24325dfc559acf36854910afc59' # Secret Key for security purposes (CSRF, {{form.hidden_tag()}})
 
-'''#Initialise Database
-app.config['CASSANDRA_HOSTS'] = ['127.0.0.1']
+##########Initialise Database#########
+app.config['CASSANDRA_HOSTS'] = ['172.17.0.2:80']
 app.config['CASSANDRA_KEYSPACE'] = "cqlengine"
-db = CQLAlchemy(app)
-'''
+database = CQLAlchemy(app)
+
+#Set up User object as table
+class User(database.Model):
+    email = database.columns.Text(primary_key=True)
+    first_name  = database.columns.Text()
+    last_name = database.columns.Text()
+    password - database.colums.Text()
+
+    def __repr__(self):
+        return (f'User {self.email}')
 
 #########Create all app routes/pages##########
 #Route to app main/registration page
