@@ -1,0 +1,12 @@
+#Create User object for database
+class User:
+    
+    def __init__(self, email, first_name, last_name, password):
+
+        self.email = email
+        self.first_name = first_name
+        self.last_name = last_name
+        self.password = password
+
+    def __repr__(self):
+        return (f'User {self.email}')

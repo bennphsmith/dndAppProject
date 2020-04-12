@@ -7,3 +7,10 @@ session.execute("CREATE KEYSPACE main WITH REPLICATION = {'class' : 'SimpleStrat
 session.set_keyspace('main')
 
 session.execute("CREATE TABLE user(email text PRIMARY KEY, first_name text, last_name text, password text)")
+'''
+email = 'ben@ben.com'
+first_name = 'ben'
+last_name = 'smith'
+password = 'password'
+session.execute("INSERT INTO user(email, first_name, last_name, password) VALUES(%s, %s, %s, %s)", (email, first_name, last_name, password))
+'''

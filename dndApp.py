@@ -17,26 +17,19 @@ App Description:
 #forms to use forms.py in same directory
 from flask import Flask, render_template, flash, url_for, redirect
 from forms import RegistrationForm, LoginForm
-from flask_cqlalchemy import CQLAlchemy
+from cassandra.cluster import Cluster
+from flask_bcrypt import Bcrypt
 
 #Initialise app
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '756ba24325dfc559acf36854910afc59' # Secret Key for security purposes (CSRF, {{form.hidden_tag()}})
+bcrypt = Bcrypt(app) #Initialise hashing framework
 
 ##########Initialise Database#########
-app.config['CASSANDRA_HOSTS'] = ['172.17.0.2:80']
-app.config['CASSANDRA_KEYSPACE'] = "cqlengine"
-database = CQLAlchemy(app)
+cluster = Cluster(['127.0.0.1']) #Set up cluster and map to local machine
+session = cluster.connect() #Connect to cluster
+session.set_keyspace('main')
 
-#Set up User object as table
-class User(database.Model):
-    email = database.columns.Text(primary_key=True)
-    first_name  = database.columns.Text()
-    last_name = database.columns.Text()
-    password - database.colums.Text()
-
-    def __repr__(self):
-        return (f'User {self.email}')
 
 #########Create all app routes/pages##########
 #Route to app main/registration page
@@ -45,7 +38,12 @@ class User(database.Model):
 def Register():
     regForm = RegistrationForm()
     if (regForm.validate_on_submit() == True):
-        flash('Success', 'success')
+        print(regForm.email.data)
+        hpass = bcrypt.generate_password_hash(regForm.password.data).decode('utf-8') #hash password and make into string
+        session.execute(
+            "INSERT INTO user(email, first_name, last_name, password) VALUES(%s, %s, %s, %s)", 
+            (regForm.email.data, regForm.first_name.data, regForm.last_name.data, hpass)) #Pass data to Cass Database
+        flash('Success', 'success') #Display flash success message
         return redirect(url_for('Login'))
     return render_template('register_form.html', form=regForm)
 
