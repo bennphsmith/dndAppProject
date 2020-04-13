@@ -38,7 +38,6 @@ session.set_keyspace('main')
 def Register():
     regForm = RegistrationForm()
     if (regForm.validate_on_submit() == True):
-        print(regForm.email.data)
         hpass = bcrypt.generate_password_hash(regForm.password.data).decode('utf-8') #hash password and make into string
         session.execute(
             "INSERT INTO user(email, first_name, last_name, password) VALUES(%s, %s, %s, %s)", 
@@ -51,9 +50,14 @@ def Register():
 @app.route('/login/', methods=['GET', 'POST'])
 def Login():
     logForm = LoginForm()
+    if (logForm.validate_on_submit() == True):
+        return redirect(url_for('Home'))
     return render_template('login_form.html', form=logForm)
 
 ######Common functions######
+@app.route('/home/', methods=['GET', 'POST'])
+def Home():
+    return ('<h1>Hello World!</h1>')
 
 
 
