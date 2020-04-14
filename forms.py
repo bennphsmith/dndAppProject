@@ -9,6 +9,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from cassandra.cluster import Cluster
+from flask_cqlalchemy import CQLAlchemy
 
 # Create Registration From for user
 # Username takes the for of an email with is inherently unique (primary key)
@@ -22,17 +23,18 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
 
+    # Check if email address is already contained in the system
+    # Display error message on the form if email address is already in use
+    # Validator automatically called when email field submitted
     def validate_email(self, email):
-        cluster = Cluster(['127.0.0.1']) #Initialise Cluster
-        session = cluster.connect('main') #Connect to keyspace
-        users_list = session.execute(
-            "SELECT * FROM user WHERE email = %s", [email.data]) #Return tuples where email address is same as one entered
-        try:
-            user = users_list[0] #Get single tuple
-        except IndexError:
-            return
-        else:
+        AlreadyRegistered = False
+        for user in User().all(): # Loop through all records in User
+            if email.data == user.email: # Return boolean True if found
+                AlreadyRegistered = True
+        if AlreadyRegistered == True:
             raise ValidationError('Email address already registered!')
+        else:
+            return
 
 
 # Create Login Form for user
@@ -42,6 +44,16 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
     def validate_email(self, email):
+        AlreadyRegistered = False
+        for user in User().all(): # Loop through all records in User
+            if email.data == user.email: # Return boolean True if found
+                AlreadyRegistered = True
+        if AlreadyRegistered == False:
+            raise ValidationError('Email address not registered!')
+        else:
+            return
+
+
         cluster = Cluster(['127.0.0.1']) #Initialise Cluster
         session = cluster.connect('main') #Connect to keyspace
         users_list = session.execute(
@@ -57,3 +69,6 @@ class LoginForm(FlaskForm):
         cluster = Cluster(['127.0.0.1']) #Initialise Cluster
         session = cluster.connect('main') #Connect to keyspace
     '''
+
+# Import at the bottom to prevent circular import error with the database - need to make files into better package structure
+from dndApp import database, User

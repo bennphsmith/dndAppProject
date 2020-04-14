@@ -23,7 +23,7 @@ Cassandra - v:
 Bootstrap - v:
 pip3 install WTF-Flask (WTForms)
 pip3 install flask-cqlalchmey
-
+pip3 install flask-login
 
 
 #########Instructions##########
