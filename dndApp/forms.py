@@ -1,10 +1,12 @@
 '''
-#####################
-Forms classes for registering new users and logging current users
-Including methods for authenticating email
+##############
+DnD Forms File to Create the forms for the website using WTForms
 Author: Benjamin Smith
-Last Edit: 09/04/2020
-#####################
+Last Edited: 15/04/2020
+Forms Description:
+1. RegistrationFrom - takes users details on registration page and provides relevant checks to database
+2. LoginFrom - takes users details on login page and provides relevant checks to database
+###############
 '''
 
 from flask_wtf import FlaskForm
@@ -12,6 +14,9 @@ from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from cassandra.cluster import Cluster
 from flask_cqlalchemy import CQLAlchemy
+from database import User
+
+# from database import database, User - MOVE TO BOTTOM IF NOT WORKING
 
 # Create Registration From for user
 # Username takes the for of an email with is inherently unique (primary key)
@@ -38,13 +43,13 @@ class RegistrationForm(FlaskForm):
         else:
             return
 
-
 # Create Login Form for user
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=2, max=20)])
     submit = SubmitField('Login')
 
+    # Checks database for user email to ensure they are a member and eligible to sign in
     def validate_email(self, email):
         AlreadyRegistered = False
         for user in User().all(): # Loop through all records in User
@@ -54,11 +59,3 @@ class LoginForm(FlaskForm):
             raise ValidationError('Email address not registered!')
         else:
             return
-
-# Create Search Form for main page
-class SearchForm(FlaskForm):
-    search_term = StringField('Search')
-    submit = submit = SubmitField('')
-
-# Import at the bottom to prevent circular import error with the database - need to make files into better package structure
-#from dndApp import database, User

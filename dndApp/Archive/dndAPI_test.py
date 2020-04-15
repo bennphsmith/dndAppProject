@@ -23,9 +23,5 @@ def LibResult(index1, index2):
     return render_template('library_search.html', data=result)
 
 
-@app.route('/library/strength/', methods=['GET', 'POST'])
-def Strength():
-    return ('<h1>Strength</h1>')
-
 if __name__ == "__main__":
     app.run(debug = True, port = 4000) #Allow dynamic changes with debugging enabled
