@@ -1,5 +1,5 @@
-<!------ HTML parent page for forms ---------->
-<!------ Orignal HTML for layout found on: https://bootsnipp.com/snippets/bxzmb ---------->
+<!------ HTML parent page template for pre-login pages: Register and Login Forms ---------->
+<!------ Orignal HTML for layout found on: https://bootsnipp.com/snippets/bxzmb - template found in original_true.html---------->
 <!------ Edited by Benjamin Smith - changes from original highlighted with comments ---------->
 <!------ Last edited: 09/04/2020 ---------->
 
@@ -16,7 +16,7 @@
         {% with messages = get_flashed_messages(with_categories=True) %} <!-- Check if any flask messages are available -->
             {% if messages == True %}
                 {% for category, message in messages %} <!-- Loop through flask messages and display if available -->
-                    <div = class="alert alert-{{category}}">
+                    <div= class="alert alert-{{category}}">
                         {{message}}
                     </div>
                 {% endfor %}

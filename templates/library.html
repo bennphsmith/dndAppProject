@@ -1,0 +1,350 @@
+<!------ HTML template page for library ---------->
+<!------ Author: Benjamin Smith  ---------->
+<!------ Last edited: 13/04/2020 ---------->
+
+{% extends "account_template.html" %} <!-- Extend template from parent form -->
+{% block content %}
+<div class ="container">
+    <div class="container" style="padding-left: 50px; padding-bottom: 50px">
+        {% block search_result %}{% endblock %} <!-- Create block to extend for search results -->
+    </div>
+    <div class="row justify-content-center">
+        <!-- Create column for Ability Scores -->
+        <div class="col-md">
+            Ability Scores
+            <ul>
+                <li>
+                    <!-- Pass back variable for dynamic REST API request to external API. Same for all following links -->
+                    <a href="{{url_for('LibResult', index1 = 'ability-scores', index2 = 'cha')}}" class="btn btn-link">
+                        Charisma
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'ability-scores', index2 = 'con')}}" class="btn btn-link">
+                        Constition
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'ability-scores', index2 = 'dex')}}" class="btn btn-link">
+                        Dexterity
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'ability-scores', index2 = 'int')}}" class="btn btn-link">
+                        Intelligence
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'ability-scores', index2 = 'str')}}" class="btn btn-link">
+                        Strength
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'ability-scores', index2 = 'wis')}}" class="btn btn-link">
+                        Wisdom
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Create column for Classes -->
+        <div class="col-md">
+            Classes
+            <ul>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'classes', index2 = 'barbarian')}}" class="btn btn-link">
+                        Barbarian
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'classes', index2 = 'bard')}}" class="btn btn-link">
+                        Bard
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'classes', index2 = 'cleric')}}" class="btn btn-link">
+                        Cleric
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'classes', index2 = 'druid')}}" class="btn btn-link">
+                        Druid
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'classes', index2 = 'fighter')}}" class="btn btn-link">
+                        Fighter
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'classes', index2 = 'monk')}}" class="btn btn-link">
+                        Monk
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'classes', index2 = 'paladin')}}" class="btn btn-link">
+                        Paladin
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'classes', index2 = 'ranger')}}" class="btn btn-link">
+                        Ranger
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'classes', index2 = 'rogue')}}" class="btn btn-link">
+                        Rogue
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'classes', index2 = 'sorcerer')}}" class="btn btn-link">
+                        Sorcerer
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'classes', index2 = 'warlock')}}" class="btn btn-link">
+                        Warlock
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'classes', index2 = 'wizard')}}" class="btn btn-link">
+                        Wizard
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Create column for Languages -->
+        <div class="col-md">
+            Languages
+            <ul>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'languages', index2 = 'abyssal')}}" class="btn btn-link">
+                        Abyssal
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'languages', index2 = 'celestial')}}" class="btn btn-link">
+                        Celestial
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'languages', index2 = 'common')}}" class="btn btn-link">
+                        Common
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'languages', index2 = 'deep-speech')}}" class="btn btn-link">
+                        Deep-Speech
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'languages', index2 = 'draconic')}}" class="btn btn-link">
+                        Draconic
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'languages', index2 = 'dwarvish')}}" class="btn btn-link">
+                        Dwarvish
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'languages', index2 = 'elvish')}}" class="btn btn-link">
+                        Elvish
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'languages', index2 = 'giant')}}" class="btn btn-link">
+                        Giant
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'languages', index2 = 'gnomish')}}" class="btn btn-link">
+                        Gnomish
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'languages', index2 = 'goblin')}}" class="btn btn-link">
+                        Goblin
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'languages', index2 = 'halfling')}}" class="btn btn-link">
+                        Halfling
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'languages', index2 = 'infernal')}}" class="btn btn-link">
+                        Infernal
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'languages', index2 = 'orc')}}" class="btn btn-link">
+                        Orc
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'languages', index2 = 'primordial')}}" class="btn btn-link">
+                        Primordial
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'languages', index2 = 'sylvan')}}" class="btn btn-link">
+                        Sylvan
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'languages', index2 = 'undercommon')}}" class="btn btn-link">
+                        Undercommon
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Create column for Races -->
+        <div class="col-md">
+            Races
+            <ul>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'races', index2 = 'dragonborn')}}" class="btn btn-link">
+                        Dragonborn
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'races', index2 = 'dwarf')}}" class="btn btn-link">
+                        Dwarf
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'races', index2 = 'elf')}}" class="btn btn-link">
+                        Elf
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'races', index2 = 'gnome')}}" class="btn btn-link">
+                        Gnome
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'races', index2 = 'half-elf')}}" class="btn btn-link">
+                        Half-Elf
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'races', index2 = 'half-orc')}}" class="btn btn-link">
+                        Half-Orc
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'races', index2 = 'halfling')}}" class="btn btn-link">
+                        Halfling
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'races', index2 = 'human')}}" class="btn btn-link">
+                        Human
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'races', index2 = 'tiefling')}}" class="btn btn-link">
+                        Tiefling
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Create column for Skills -->
+        <div class="col-md">
+            Skills
+            <ul>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'skills', index2 = 'acrobatics')}}" class="btn btn-link">
+                        Acrobatics
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'skills', index2 = 'animal-handling')}}" class="btn btn-link">
+                        Animal-Handling
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'skills', index2 = 'arcana')}}" class="btn btn-link">
+                        Arcana
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'skills', index2 = 'athletics')}}" class="btn btn-link">
+                        Athletics
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'skills', index2 = 'deception')}}" class="btn btn-link">
+                        Deception
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'skills', index2 = 'history')}}" class="btn btn-link">
+                        History
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'skills', index2 = 'insight')}}" class="btn btn-link">
+                        Insight
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'skills', index2 = 'intimidation')}}" class="btn btn-link">
+                        Intimidation
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'skills', index2 = 'investigation')}}" class="btn btn-link">
+                        Investigation
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'skills', index2 = 'medicine')}}" class="btn btn-link">
+                        Medicine
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'skills', index2 = 'nature')}}" class="btn btn-link">
+                        Nature
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'skills', index2 = 'perception')}}" class="btn btn-link">
+                        Perception
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'skills', index2 = 'performance')}}" class="btn btn-link">
+                        Performance
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'skills', index2 = 'persuasion')}}" class="btn btn-link">
+                        Persuasion
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'skills', index2 = 'religion')}}" class="btn btn-link">
+                        Religion
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'skills', index2 = 'sleight-of-hand')}}" class="btn btn-link">
+                        Sleight-of-Hand
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult', index1 = 'skills', index2 = 'stealth')}}" class="btn btn-link">
+                        Stealth
+                    </a>
+                </li>
+                <li>
+                    <a href="{{url_for('LibResult',  index1 = 'skills', index2 = 'survival')}}" class="btn btn-link">
+                        Suvival
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}

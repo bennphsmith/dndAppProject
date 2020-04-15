@@ -1,0 +1,8 @@
+<!------ HTML template page for library after API resource is requested ---------->
+<!------ Author: Benjamin Smith  ---------->
+<!------ Last edited: 15/04/2020 ---------->
+
+{% extends "library.html" %} <!------ Call library.html as parent template  ---------->
+{% block search_result %}
+    {{data}} <!------ Display json data passed in call  ---------->
+{% endblock %}

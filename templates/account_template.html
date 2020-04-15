@@ -1,0 +1,24 @@
+<!------ HTML template page for all pages after login ---------->
+<!------ Author: Benjamin Smith  ---------->
+<!------ Last edited: 15/04/2020 ---------->
+
+
+<!DOCTYPE html>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" style="background-image: url('tavern_interior.jpg')">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!------ Create NavBar for quick links around account pages ---------->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{url_for('Library')}}">The Library</a> <!------ Link back to main library.html page ---------->
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="#">Create New Character</a></li> <!------ Links back to other account pages ---------->
+      <li><a href="#">Existing Characters</a></li>
+    </ul>
+  </div>
+</nav>
+{% block content %}{% endblock content %} <!-- Declare block content for library pages to extend -->

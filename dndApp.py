@@ -15,12 +15,13 @@ App Description:
 #########Initialise and Configure App and Import Modules############
 # Flask for web server connectivity
 # forms to use forms.py in same directory
+import requests
 from flask import Flask, render_template, flash, url_for, redirect
-from forms import RegistrationForm, LoginForm
+from forms import RegistrationForm, LoginForm, SearchForm
 from cassandra.cluster import Cluster
 from flask_bcrypt import Bcrypt
 from flask_cqlalchemy import CQLAlchemy
-from flask_login import LoginManager, UserMixin, login_user
+from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
 
 #Initialise app
 app = Flask(__name__)
@@ -38,14 +39,6 @@ def load_user(user_id):
         if user_id == user.email:
             return user
 
-    '''
-    for user in User().all():
-        if email == user.email:
-            return User()
-        else:
-            return
-    '''
-
 
 ##########Initialise Database#########
 app.config['CASSANDRA_HOSTS'] = ['127.0.0.1'] # Set database location
@@ -58,6 +51,8 @@ database = CQLAlchemy(app) # Create instance of CQLAlchemy database for app
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/register/', methods=['GET', 'POST'])
 def Register():
+    if current_user.is_authenticated:
+        return redirect(url_for('Home'))
     regForm = RegistrationForm()
     if (regForm.validate_on_submit() == True): # If for is submitted then ...
         hpass = bcrypt.generate_password_hash(
@@ -89,10 +84,21 @@ def Login():
             return redirect(url_for('Login')) # If login page unsucessful return user to login page
     return render_template('login_form.html', form=logForm)
 
-#Route to home page for user
+# Route for Logout
+@app.route('/logout/', methods=['GET'])
+def Logout():
+    logout_user()
+    return ('<h1>You are Logged out</h1>')
+
+# Route to home page for user
 @app.route('/home/', methods=['GET', 'POST'])
 def Home():
+    dnd_url_template = 'http://dnd5eapi.co/api/'
+    searchForm = SearchForm()
+    if (searchForm.validate_on_submit() == True):
+        search_data = 
     return ('<h1>Hello World!</h1>')
+
 
 
 ######Common functions######
