@@ -12,11 +12,9 @@ Forms Description:
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from cassandra.cluster import Cluster
 from flask_cqlalchemy import CQLAlchemy
-from database import User
+from dndApp.database import User
 
-# from database import database, User - MOVE TO BOTTOM IF NOT WORKING
 
 # Create Registration From for user
 # Username takes the for of an email with is inherently unique (primary key)

@@ -1,4 +1,4 @@
-
+from dndApp import app
 
 ###########Run Script from Python##########
 # Enable script to be run from python
