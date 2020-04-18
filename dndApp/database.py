@@ -34,13 +34,14 @@ class User(database.Model, UserMixin):
 
 # Create Character Class
 class Character(database.Model):
+    __table_name__ = 'character_by_user'
     char_name = database.columns.Text(primary_key=True)
     char_align = database.columns.Text(required=True)
     char_race = database.columns.Text(required=True)
     char_class = database.columns.Text(required=True)
     char_background = database.columns.Text(required=True)
     char_desc = database.columns.Text()
-    char_lang = database.colums.List()
+    char_lang = database.columns.List(database.columns.Text)
     char_xp = database.columns.Integer(required=True) # Start on 0
     char_hp = database.columns.Integer(required=True)
     char_hp_temp = database.columns.Integer(required=True) # Start on 0
@@ -48,11 +49,11 @@ class Character(database.Model):
     char_int = database.columns.Integer(required=True) # Also the dex modifier
     char_speed = database.columns.Integer(required=True)
     char_death = database.columns.Integer(required=True) # Start on 0 (can go 1 - 3, on 3 is deleted)
-    char_ability = database.colums.Map(required=True) # Map UserType ability scores to traits
+    char_ability = database.columns.Map(database.columns.Text, database.columns.Integer) # Map UserType ability scores to traits
     char_insp = database.columns.Integer(required=True) # Start with 0
     char_profbonus = database.columns.Integer(required=True) # Start with 0 but increase proportional to level
-    char_save = database.colums.Map(required=True) # List with saving throw per trait
-    char_skill = database.colums.Map(required=True) # List with skill modifier per skill
+    char_save = database.columns.Map(database.columns.Text, database.columns.Integer, required=True) # List with saving throw per trait
+    char_skill = database.columns.Map(database.columns.Text, database.columns.Integer, required=True) # List with skill modifier per skill
     char_perc = database.columns.Integer(required=True) # 10 + perception bonus
     char_prof = database.columns.Text() # Big Text box for them to enter details manually how they like
     char_equip = database.columns.Text() # Big Text box for them to enter details manually how they like
@@ -60,40 +61,12 @@ class Character(database.Model):
     char_extra = database.columns.Text() # Big Text box for them to enter details manually how they like, meant to include: traits, ideals, bonds and flaws
     char_user = database.columns.Text(required=True) # Denotes the charcter creator user, should be used as the partition key
 
-    # Create constructor to initialise constants when creating a new charcter
-    def __init__(self):
-        char_xp = 0
-        char_hp_temp = 0
-        char_death = 0
-        char_insp = 0
-        char_profbonus = 0
-
-class Ability_Values(db.UserType):
-    ability_score = database.columns.Integer(required=True)
-    ability_mod = database.columns.Integer(required=True)
-
 #################Character Creation Database Lists#################
 
-class Ability(database.Model):
-    name = database.columns.Text(primary_key=True)
-    value = database.columns.Text(required=True)
-
 class Align(database.Model):
-    name = database.columns.Text(primary_key=True)
-    value = database.columns.Text(required=True)
+    align_name = database.columns.Text(primary_key=True)
+    align_value = database.columns.Text(required=True)
 
 class Background(database.Model):
-    name = database.columns.Text(primary_key=True)
-    value = database.columns.Text(required=True)
-
-class CharClass(database.Model):
-    name = database.columns.Text(primary_key=True)
-    value = database.columns.Text(required=True)
-
-class Race(database.Model):
-    name = database.columns.Text(primary_key=True)
-    value = database.columns.Text(required=True)
-
-class Skill(database.Model):
-    name = database.columns.Text(primary_key=True)
-    value = database.columns.Text(required=True)
+    background_name = database.columns.Text(primary_key=True)
+    background_value = database.columns.Text(required=True)

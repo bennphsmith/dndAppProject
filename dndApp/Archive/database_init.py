@@ -14,16 +14,16 @@ from cassandra.cluster import Cluster
 cluster = Cluster(['127.0.0.1']) # Create new Cluster Instance and connect to Cassandra database
 session = cluster.connect() # Create a new session
 
-session.execute("CREATE KEYSPACE main WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 1}") # Create new keyspace
+#session.execute("CREATE KEYSPACE main WITH REPLICATION = {'class' : 'SimpleStrategy', 'replication_factor' : 1}") # Create new keyspace
 session.set_keyspace('main') # Use keyspace for session
-
+'''
 # Create user table
 session.execute("""CREATE TABLE user(
                 email text PRIMARY KEY, 
                 first_name text, 
                 last_name text, 
                 password text)""")
-
+'''
 # Create Character by User table
 session.execute("""CREATE TABLE character_by_user(
                 char_name text,
@@ -54,6 +54,27 @@ session.execute("""CREATE TABLE character_by_user(
                 PRIMARY KEY (char_name, char_user))""")
 
 ################Create Standard tables to call the dnd Attributes###############
+
+
+######## Create json dicts using external API
+
+data_abilities = json.load(urllib.request.urlopen('http://dnd5eapi.co/api/ability-scores'))
+data_classes = json.load(urllib.request.urlopen('http://dnd5eapi.co/api/classes'))
+data_races = json.load(urllib.request.urlopen('http://dnd5eapi.co/api/races'))
+data_skills = json.load(urllib.request.urlopen('http://dnd5eapi.co/api/skills'))
+
+
+######### Create Ability Table
+
+session.execute("""CREATE TABLE ability(
+                ability_name text PRIMARY KEY,
+                ability_value text)""")
+
+for obj in data_abilities['results']:
+    session.execute("""INSERT INTO ability(ability_name, ability_value) 
+                    VALUES(%s, %s)""",
+                    (obj['name'], obj['index']))           
+
 
 ######## Character Alignment Table
 session.execute("""CREATE TABLE align(
@@ -90,3 +111,38 @@ session.execute("INSERT INTO background(background_name, background_value) VALUE
 session.execute("INSERT INTO background(background_name, background_value) VALUES ('Sailor', 'sailor')")
 session.execute("INSERT INTO background(background_name, background_value) VALUES ('Soldier', 'soldier')")
 session.execute("INSERT INTO background(background_name, background_value) VALUES ('Urchin', 'urchin')")
+
+
+######### Character Class Table
+
+session.execute("""CREATE TABLE charClass(
+                class_name text PRIMARY KEY,
+                class_value text)""")
+
+for obj in data_classes['results']:
+    session.execute("""INSERT INTO charClass(class_name, class_value) 
+                    VALUES(%s, %s)""", 
+                    (obj['name'], obj['index']))
+
+######### Create Race Table
+
+session.execute("""CREATE TABLE race(
+                race_name text PRIMARY KEY,
+                race_value text)""")
+
+for obj in data_races['results']:
+    session.execute("""INSERT INTO race(race_name, race_value) 
+                    VALUES(%s, %s)""", 
+                    (obj['name'], obj['index']))
+
+
+########## Create Skills Table
+
+session.execute("""CREATE TABLE skill(
+                skill_name text PRIMARY KEY,
+                skill_value text)""")
+
+for obj in data_skills['results']:
+    session.execute("""INSERT INTO skill(skill_name, skill_value) 
+                    VALUES(%s, %s)""", 
+                    (obj['name'], obj['index']))

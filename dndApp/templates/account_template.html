@@ -16,8 +16,8 @@
       <a class="navbar-brand" href="{{url_for('Library')}}">The Library</a> <!------ Link back to main library.html page ---------->
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">Create New Character</a></li> <!------ Links back to other account pages ---------->
-      <li><a href="#">Existing Characters</a></li>
+      <li><a href="{{url_for('CharCreate')}}">Create New Character</a></li> <!------ Links back to other account pages ---------->
+      <li><a href="{{url_for('CharList')}}">Character List</a></li>
       <li><a href="{{url_for('Logout')}}">Logout</a></li> <!------ Logs user out ---------->
     </ul>
   </div>

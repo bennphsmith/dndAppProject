@@ -16,7 +16,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, IntegerField, SelectField, SelectMultipleField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_cqlalchemy import CQLAlchemy
-from dndApp.database import User
+from dndApp.database import User, Character, Align, Background
 
 
 # Create Registration From for user
@@ -63,16 +63,17 @@ class LoginForm(FlaskForm):
 
 # Get Request to external API to get the data for the SelectField Lists
 data_class = json.load(urllib.request.urlopen('http://dnd5eapi.co/api/classes')) # Transform data into dictionary for ease of access
+data_language = json.load(urllib.request.urlopen('http://dnd5eapi.co/api/languages'))
 data_races = json.load(urllib.request.urlopen('http://dnd5eapi.co/api/races'))
 
-class CharacterForm(FlaskFrom):
+class CharacterForm(FlaskForm):
     char_name = StringField('Name', validators=[DataRequired()])
-    char_align = SelectField(u'Alignment', validators=[DataRequired()], choices=[(align.index, align.name) for align in Align().all()])
-    char_race = SelectField(u'Race', validators=[DataRequired()], choices=[(race['index'], race['name']) for race in data_races['results'])
-    char_class = SelectField(u'Class', validators=[DataRequired()], choices=[(charClass['index'], charClass['name']) for charClass in data_class['results'])
-    char_background = SelectField('Background', validators=[DataRequired()], choices=[(background.index, background.name) for background in Background().all()])
+    char_align = SelectField(u'Alignment', validators=[DataRequired()], choices=[(align.align_value, align.align_name) for align in Align().all()])
+    char_race = SelectField(u'Race', validators=[DataRequired()], choices=[(race['index'], race['name']) for race in data_races['results']])
+    char_class = SelectField(u'Class', validators=[DataRequired()], choices=[(charClass['index'], charClass['name']) for charClass in data_class['results']])
+    char_background = SelectField('Background', validators=[DataRequired()], choices=[(background.background_value, background.background_name) for background in Background().all()])
     char_desc = TextAreaField('Description')
-    char_lang = SelectMultipleField(u'Languages', choices=[(lang.index, lang.name) for lang in Language().all()])
+    char_lang = SelectMultipleField(u'Languages', choices=[(lang['index'], lang['name']) for lang in data_language['results']])
     char_xp = IntegerField('XP', validators=[DataRequired()], default=0) # Start on 0
     char_hp = IntegerField('HP', validators=[DataRequired()])
     char_hp_temp = IntegerField('Temporary HP', default=0) # Start on 0

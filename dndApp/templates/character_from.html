@@ -1,0 +1,32 @@
+<!------ HTML register page for app.route('/register') ---------->
+<!------ Author: Benjamin Smith ---------->
+<!------ Last edited: 09/04/2020 ---------->
+
+{% extends "account_template.html" %} <!-- Extend template from parent form -->
+{% block content %}
+<div class="container">
+    <div id="character-row" class="row justify-content-center align-items-center">
+        <div id="character-column" class="col-md-6">
+            <div id="character-box" class="col-md-12">
+                <form id="character-form" class="form" action="" method="POST">
+                    <div class="form-group">
+                        {% for field in form %}
+                            {{field.label(class="form-control-label text-info")}} <!-- Call first_name from form object -->
+                                {% if field.errors %} <!-- Check to see if input is valid -->
+                                    {{field(class="form-control text-info is-invalid")}}
+                                        <div class="invalid-feedback">
+                                            {% for error in field.errors %} <!-- Loop through and print out errors -->
+                                                <span>{{error}}</span>
+                                            {% endfor %}
+                                        </div>
+                                {% else %}
+                                    {{field(class="form-control text-info")}}
+                                {% endif %}
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>       
+        </div>       
+    </div>               
+</div>
+{% endblock content %}
