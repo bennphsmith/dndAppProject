@@ -2,6 +2,9 @@ from cassandra.cluster import Cluster
 from flask import Flask
 from flask_cqlalchemy import CQLAlchemy
 
+
+cluster = Cluster() #C
+
 app = Flask(__name__)
 app.config['CASSANDRA_HOSTS'] = ['127.0.0.1']
 app.config['CASSANDRA_KEYSPACE'] = "main"

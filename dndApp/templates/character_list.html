@@ -1,0 +1,19 @@
+{% extends "account_template.html" %}
+{% block content %}
+    <div class ="container">
+        <div class="row justify-content-center">
+            <div class="col-md">
+                Characters
+                <ul>
+                    {% for char in char_list %}
+                    <li>
+                        <a href="{{url_for('CharEdit', character_name = char)}}" class="btn btn-link">
+                            {{char}}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
