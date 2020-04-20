@@ -13,15 +13,6 @@
 <body style="background-image:url(tavern_interior.jpg)"></body>
     <div id="login">
         {% block title %}{% endblock title %} <!-- Declare page title -->
-        {% with messages = get_flashed_messages(with_categories=True) %} <!-- Check if any flask messages are available -->
-            {% if messages == True %}
-                {% for category, message in messages %} <!-- Loop through flask messages and display if available -->
-                    <div= class="alert alert-{{category}}">
-                        {{message}}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">

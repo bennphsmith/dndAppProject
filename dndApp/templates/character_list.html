@@ -1,14 +1,21 @@
-{% extends "account_template.html" %}
+<!------ HTML template page for character list specific to each user ---------->
+<!------ Author: Benjamin Smith  ---------->
+<!------ Last edited: 20/04/2020 ---------->
+
+{% extends "account_template.html" %} <!-- Use account template a parent -->
 {% block content %}
     <div class ="container">
         <div class="row justify-content-center">
             <div class="col-md">
                 Characters
                 <ul>
-                    {% for char in char_list %}
+                    {% for char in char_list %} <!-- Loop through characters passed in list -->
                     <li>
-                        <a href="{{url_for('CharEdit', character_name = char)}}" class="btn btn-link">
+                        <a href="{{url_for('CharEdit', character_name = char)}}" class="btn btn-link"> <!-- Create Hyperlink to the edit page -->
                             {{char}}
+                        </a>
+                        <a href="{{url_for('CharDelete', character_name = char)}}" class="btn btn-link; font weight: 200; font-size: small"> <!-- Create Hyperlink to the delete page -->
+                            delete
                         </a>
                     </li>
                     {% endfor %}

@@ -74,31 +74,31 @@ class CharacterForm(FlaskForm):
     char_background = SelectField('Background', validators=[DataRequired()], choices=[(background.background_value, background.background_name) for background in Background().all()])
     char_desc = TextAreaField('Description')
     char_lang = SelectMultipleField(u'Languages', choices=[(lang['index'], lang['name']) for lang in data_language['results']])
-    char_xp = IntegerField('XP', validators=[DataRequired()], default=0) # Start on 0
+    char_xp = IntegerField('XP', default=0) # Start on 0
     char_hp = IntegerField('HP', validators=[DataRequired()])
     char_hp_temp = IntegerField('Temporary HP', default=0) # Start on 0
     char_armour = IntegerField('Armour Class', validators=[DataRequired()])
     char_initiative = IntegerField('Initiative', validators=[DataRequired()]) # Also the dex modifier
     char_speed = IntegerField('Speed', validators=[DataRequired()], default=25)
     char_death = IntegerField('Death Throws', default=0) # Start on 0
+    char_insp = IntegerField('Inspriation', default=0) # Start with 0
+    char_profbonus = IntegerField('Proficiency Bonus', validators=[DataRequired()], default=2) # Start with 2 but increase proportional to level
     # List all the ability scores for the form
-    char_absc_str = IntegerField('STR', validators=[DataRequired()]) # List with ability scorce and modifier per trait, modifier based on score
-    char_absc_dex = IntegerField('DEX', validators=[DataRequired()])
-    char_absc_con = IntegerField('CON', validators=[DataRequired()])
-    char_absc_int = IntegerField('INT', validators=[DataRequired()])
-    char_absc_wis = IntegerField('WIS', validators=[DataRequired()])
-    char_absc_cha = IntegerField('CHA', validators=[DataRequired()])
-    char_insp = IntegerField('Inspriation', validators=[DataRequired()], default=0) # Start with 0
-    char_profbonus = IntegerField('Proficiency Bonus', validators=[DataRequired()], default=0) # Start with 0 but increase proportional to level
+    char_absc_str = IntegerField('Ability Score: STR', validators=[DataRequired()]) # List with ability scorce and modifier per trait, modifier based on score
+    char_absc_dex = IntegerField('Ability Score: DEX', validators=[DataRequired()])
+    char_absc_con = IntegerField('Ability Score: CON', validators=[DataRequired()])
+    char_absc_int = IntegerField('Ability Score: INT', validators=[DataRequired()])
+    char_absc_wis = IntegerField('Ability Score: WIS', validators=[DataRequired()])
+    char_absc_cha = IntegerField('Ability Score: CHA', validators=[DataRequired()])
     # List all saving throws - enter manually as this can change depending on the character
-    char_save_str = IntegerField('STR', validators=[DataRequired()]) # List with ability scorce and modifier per trait, modifier based on score
-    char_save_dex = IntegerField('DEX', validators=[DataRequired()])
-    char_save_con = IntegerField('CON', validators=[DataRequired()])
-    char_save_int = IntegerField('INT', validators=[DataRequired()])
-    char_save_wis = IntegerField('WIS', validators=[DataRequired()])
-    char_save_cha = IntegerField('CHA', validators=[DataRequired()])
+    char_save_str = IntegerField('Saving Throw: STR', validators=[DataRequired()]) # List with ability scorce and modifier per trait, modifier based on score
+    char_save_dex = IntegerField('Saving Throw: DEX', validators=[DataRequired()])
+    char_save_con = IntegerField('Saving Throw: CON', validators=[DataRequired()])
+    char_save_int = IntegerField('Saving Throw: INT', validators=[DataRequired()])
+    char_save_wis = IntegerField('Saving Throw: WIS', validators=[DataRequired()])
+    char_save_cha = IntegerField('Saving Throw: CHA', validators=[DataRequired()])
     # List all skill modifiers
-    char_skill_arco = IntegerField('Acrobatics', validators=[DataRequired()])
+    char_skill_acro = IntegerField('Acrobatics', validators=[DataRequired()])
     char_skill_anhan = IntegerField('Animal Handling', validators=[DataRequired()])
     char_skill_arc = IntegerField('Arcana', validators=[DataRequired()])
     char_skill_ath = IntegerField('Athletics', validators=[DataRequired()])
